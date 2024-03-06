@@ -23,6 +23,8 @@ router.post('/', (req,res) => { //making a post request
     const newItem = new Item({
         name: req.body.name
     });
+
+    newItem.save().then(item => res.json(item)); //save it to database //gives it back the item that we saving and spit out item
 });
 
 
