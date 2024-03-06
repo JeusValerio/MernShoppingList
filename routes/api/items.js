@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 }); //represents actual endpoint using router
 
 //@route POST api/items //Post Request
-//@desc Add a POST
+//@desc Add a Item
 //@access Public
 
 router.post('/', (req,res) => { //making a post request
@@ -26,6 +26,21 @@ router.post('/', (req,res) => { //making a post request
 
     newItem.save().then(item => res.json(item)); //save it to database //gives it back the item that we saving and spit out item
 });
+
+//@route DELETE api/items/:id
+//@desc DELETE a Item
+//@access Public
+
+router.delete('/:id', async (req, res) => {
+    try {
+        await Item.findByIdAndDelete(req.params.id);
+        res.json({ delete: true });
+    } catch (err) {
+        res.status(404).json({ delete: false });
+    }
+});
+    
+   
 
 
 module.exports = router;
