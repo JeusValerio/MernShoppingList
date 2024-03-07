@@ -30,7 +30,14 @@ router.post('/', (req,res) => { //making a post request
 //@route DELETE api/items/:id
 //@desc DELETE a Item
 //@access Public
-
+router.delete('/:id', async (req, res) => {
+    try {
+        await Item.findByIdAndDelete(req.params.id);
+        res.json({ delete: true });
+    } catch (err) {
+        res.status(404).json({ delete: false });
+    }
+});
 
     
    
