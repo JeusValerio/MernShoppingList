@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
+import AppNavbar from './components/AppNavbar';
 
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap - css design templates for forms, tables, images
 import './App.css';
 
 
-function App() {
+class App extends Component {
+  render(){
   return (
+
     <div className="App">
-      <h1>Hello</h1>
+
+      <AppNavbar />
+
     </div>
   );
+
+  }
+  
 }
 
 export default App;
