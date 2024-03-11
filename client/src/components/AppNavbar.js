@@ -11,5 +11,18 @@ import {
 } from 'reactstrap';
 
 class AppNavbar extends Component {
-    
-}
+        state = {
+            isOpen: false
+        }
+        ToggleEvent = () => {
+            this.setState({
+                isOpen: !this.state.isOpen
+            });
+        }
+
+    }
+
+
+
+
+export default AppNavbar;
