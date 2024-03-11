@@ -20,6 +20,14 @@ class AppNavbar extends Component {
             });
         }
 
+        render() {
+            <div>
+                <Navbar color = "dark" dark expand="sm" className="mb-5">
+
+                </Navbar>
+            </div>
+        }
+
     }
 
 
