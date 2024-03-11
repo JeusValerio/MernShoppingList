@@ -7,7 +7,8 @@ import {
     Nav,
     NavItem,
     NavLink,
-    Container //bootstrap container
+    Container, //bootstrap container
+    NavbarToggler
 } from 'reactstrap';
 
 class AppNavbar extends Component {
@@ -22,8 +23,19 @@ class AppNavbar extends Component {
 
         render() {
             <div>
-                <Navbar color = "dark" dark expand="sm" className="mb-5">
-
+                <Navbar color = "dark" dark expand="sm" className="mb-5"> 
+                    <Container>
+                        <NavbarBrand href="/">ShoppingList</NavbarBrand>
+                        <NavbarToggler OnClick={this.toggle}></NavbarToggler>
+                        <Collapse isOpen={this.state.isOpen} navbar></Collapse>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink href="https://github.com/JeusValerio">
+                                    Github
+                                </NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Container>
                 </Navbar>
             </div>
         }
