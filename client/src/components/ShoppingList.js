@@ -12,7 +12,8 @@ class ShoppingList extends Component {
             { id: uuidv4(), name: 'Water', isEditing: false },
             { id: uuidv4(), name: 'Vegetables', isEditing: false },
         ],
-        newItemName: '' // New state to hold the value of the new item input
+        newItemName: '', // New state to hold the value of the new item input
+        searchQuery: '', // State to hold the search query
     }
 
     handleChange = (e, itemId) => {
@@ -51,8 +52,17 @@ class ShoppingList extends Component {
         }
     }
 
+    handleSearchChange = e => {
+        this.setState({ searchQuery: e.target.value });
+    }
+
     render() {
-        const { items, newItemName } = this.state;
+        const { items, newItemName, searchQuery } = this.state;
+        // Filter items based on search query
+        const filteredItems = items.filter(item =>
+            item.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
         return (
             <Container>
                 <Form onSubmit={this.handleSubmit} style={{ marginBottom: '2rem' }}>
@@ -64,16 +74,24 @@ class ShoppingList extends Component {
                                 placeholder="Enter item name"
                                 value={newItemName}
                                 onChange={e => this.setState({ newItemName: e.target.value })}
-                                className = "input-field"
+                                className="input-field"
                                 style={{ marginRight: '1rem' }}
                             />
                             <Button color="dark" type="submit">Add</Button>
                         </div>
                     </FormGroup>
                 </Form>
+                {/* Search input */}
+                <Input
+                    type="text"
+                    placeholder="Search"
+                    value={searchQuery}
+                    onChange={this.handleSearchChange}
+                    style={{ marginBottom: '1rem' }}
+                />
                 <ListGroup>
                     <TransitionGroup className="shopping-list">
-                        {items.map(({ id, name, isEditing }) => (
+                        {filteredItems.map(({ id, name, isEditing }) => (
                             <CSSTransition key={id} timeout={500} classNames="fade">
                                 <ListGroupItem className="d-flex justify-content-between align-items-center">
                                     {isEditing ? (
@@ -82,7 +100,6 @@ class ShoppingList extends Component {
                                                 type="text"
                                                 value={name}
                                                 onChange={e => this.handleChange(e, id)}
-                                                
                                             />
                                             <Button
                                                 color="success"
@@ -133,4 +150,4 @@ class ShoppingList extends Component {
     }
 }
 
-export default ShoppingList;
+export default ShoppingList
