@@ -1,0 +1,8 @@
+/* ShoppingList.css */
+.input-field {
+    background-color: #c29912; /* Change to your desired background color */
+    border: none; /* Optionally remove border */
+    border-radius: 5px; /* Optionally add border-radius */
+    padding: 0.5rem; /* Optionally adjust padding */
+    width: 200px; /* Optionally adjust width */
+}

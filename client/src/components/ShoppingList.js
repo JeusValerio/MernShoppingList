@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuidv4 } from 'uuid';
+import './ShoppingList.css';
 
 class ShoppingList extends Component {
     state = {
@@ -60,11 +61,10 @@ class ShoppingList extends Component {
                         <div className="d-flex">
                             <Input
                                 type="text"
-                                name="itemName"
-                                id="itemName"
                                 placeholder="Enter item name"
                                 value={newItemName}
                                 onChange={e => this.setState({ newItemName: e.target.value })}
+                                className = "input-field"
                                 style={{ marginRight: '1rem' }}
                             />
                             <Button color="dark" type="submit">Add</Button>
@@ -82,11 +82,12 @@ class ShoppingList extends Component {
                                                 type="text"
                                                 value={name}
                                                 onChange={e => this.handleChange(e, id)}
+                                                
                                             />
                                             <Button
                                                 color="success"
                                                 size="sm"
-                                                className="ml-2"
+                                                className="ml-2 save-btn"
                                                 style={{ margin: '0 0.2rem' }} // Added margin style
                                                 onClick={() => this.handleSave(id)}
                                             >
