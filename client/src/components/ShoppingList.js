@@ -6,24 +6,45 @@ import { v4 as uuidv4 } from 'uuid';
 class ShoppingList extends Component {
     state = {
         items: [
-            { id: uuidv4(), name: 'Eggs' },
-            { id: uuidv4(), name: 'Milk' },
-            { id: uuidv4(), name: 'Water' },
-            { id: uuidv4(), name: 'Vegetables' },
+            { id: uuidv4(), name: 'Eggs', isEditing: false },
+            { id: uuidv4(), name: 'Milk', isEditing: false },
+            { id: uuidv4(), name: 'Water', isEditing: false },
+            { id: uuidv4(), name: 'Vegetables', isEditing: false },
         ],
         newItemName: '' // New state to hold the value of the new item input
     }
 
-    handleChange = (e) => {
-        this.setState({ newItemName: e.target.value });
+    handleChange = (e, itemId) => {
+        const { value } = e.target;
+        this.setState(state => ({
+            items: state.items.map(item =>
+                item.id === itemId ? { ...item, name: value } : item
+            )
+        }));
     }
 
-    handleSubmit = (e) => {
+    handleEdit = itemId => {
+        this.setState(state => ({
+            items: state.items.map(item =>
+                item.id === itemId ? { ...item, isEditing: true } : item
+            )
+        }));
+    }
+
+    handleSave = itemId => {
+        this.setState(state => ({
+            items: state.items.map(item =>
+                item.id === itemId ? { ...item, isEditing: false } : item
+            )
+        }));
+    }
+
+    handleSubmit = e => {
         e.preventDefault();
         const { newItemName } = this.state;
         if (newItemName.trim()) {
             this.setState(state => ({
-                items: [...state.items, { id: uuidv4(), name: newItemName }],
+                items: [...state.items, { id: uuidv4(), name: newItemName, isEditing: false }],
                 newItemName: '' // Clear input after adding item
             }));
         }
@@ -43,7 +64,7 @@ class ShoppingList extends Component {
                                 id="itemName"
                                 placeholder="Enter item name"
                                 value={newItemName}
-                                onChange={this.handleChange}
+                                onChange={e => this.setState({ newItemName: e.target.value })}
                                 style={{ marginRight: '1rem' }}
                             />
                             <Button color="dark" type="submit">Add</Button>
@@ -52,21 +73,55 @@ class ShoppingList extends Component {
                 </Form>
                 <ListGroup>
                     <TransitionGroup className="shopping-list">
-                        {items.map(({ id, name }) => (
+                        {items.map(({ id, name, isEditing }) => (
                             <CSSTransition key={id} timeout={500} classNames="fade">
-                                <ListGroupItem>
-                                    <Button
-                                    className="remove-btn"
-                                    color="danger"
-                                    size= "sm"
-                                    style={{ marginRight: '0.5rem' }}
-                                    onClick = {() => {
-                                        this.setState(state => ({
-                                            items: state.items.filter(item => item.id !== id)
-                                        }))
-                                    }}
-                                    >&times;</Button>
-                                    {name}
+                                <ListGroupItem className="d-flex justify-content-between align-items-center">
+                                    {isEditing ? (
+                                        <>
+                                            <Input
+                                                type="text"
+                                                value={name}
+                                                onChange={e => this.handleChange(e, id)}
+                                            />
+                                            <Button
+                                                color="success"
+                                                size="sm"
+                                                className="ml-2"
+                                                style={{ margin: '0 0.2rem' }} // Added margin style
+                                                onClick={() => this.handleSave(id)}
+                                            >
+                                                Save
+                                            </Button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span>{name}</span>
+                                            <div>
+                                                <Button
+                                                    className="ml-2"
+                                                    color="info"
+                                                    size="sm"
+                                                    style={{ margin: '0 0.20rem' }} // Added margin style
+                                                    onClick={() => this.handleEdit(id)}
+                                                >
+                                                    Edit
+                                                </Button>
+                                                <Button
+                                                    className="ml-2"
+                                                    color="danger"
+                                                    size="sm"
+                                                    style={{ margin: '0 0.2rem' }} // Added margin style
+                                                    onClick={() => {
+                                                        this.setState(state => ({
+                                                            items: state.items.filter(item => item.id !== id)
+                                                        }))
+                                                    }}
+                                                >
+                                                    &times;
+                                                </Button>
+                                            </div>
+                                        </>
+                                    )}
                                 </ListGroupItem>
                             </CSSTransition>
                         ))}
