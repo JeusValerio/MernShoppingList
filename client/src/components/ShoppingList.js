@@ -95,7 +95,7 @@ class ShoppingList extends Component {
                             <CSSTransition key={id} timeout={500} classNames="fade">
                                 <ListGroupItem className="d-flex justify-content-between align-items-center">
                                     {isEditing ? (
-                                        <>
+                                        <>https://admin.rankedgaming.com/rooms/game.php?game=dotadynamic&id=8969835
                                             <Input
                                                 type="text"
                                                 value={name}
