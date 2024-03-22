@@ -13,4 +13,12 @@ export const deleteItem  = id => {
         payload: id
         
     };
-};      
+};
+
+export const addItem  = item => {
+    return{ //going to ItemReducer and checking action.type
+        type: ADD_ITEMS,
+        payload: item
+        
+    };
+};

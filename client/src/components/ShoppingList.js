@@ -20,20 +20,7 @@ class ShoppingList extends Component {
         const { item } = this.props;    
         return (
             <Container>
-                <Button
-                    color="dark"    
-                    style={{ marginBottom: '2rem' }}	
-                    onClick={() => {
-                        const name = prompt('Enter Item');
-                        if (name) {
-                            this.setState(state => ({
-                                item: [...state.item, { id: uuidv4(), name }]
-                            }));
-                        }
-                    }}
-                >
-                    Add Item
-                </Button>
+                
 
                 <ListGroup>
                     <TransitionGroup className="shopping-list">
