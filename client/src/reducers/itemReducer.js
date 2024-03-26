@@ -1,15 +1,11 @@
 //get item to dispatch from the server to the reducer
 //import uuid from 'uuid';
 import { v4 as uuidv4 } from 'uuid';
-import { GET_ITEMS, ADD_ITEMS, DELETE_ITEMS } from '../actions/types';
+import { GET_ITEMS, ADD_ITEMS, DELETE_ITEMS, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
-    item: [
-        { id: uuidv4(), name: 'Eggs' },
-        { id: uuidv4(), name: 'Milk' },
-        { id: uuidv4(), name: 'Steak' },
-        { id: uuidv4(), name: 'Water' },
-    ]
+    item: [],
+    loading: false
 };   
 
 export default function(state = initialState, action) {
@@ -27,6 +23,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 item: [action.payload, ...state.item]
+            };
+        case ITEMS_LOADING:
+            return {
+                ...state,
+                loading: true
             }
         default:
             return state;

@@ -1,10 +1,15 @@
-import { GET_ITEMS, ADD_ITEMS, DELETE_ITEMS } from './types';   
+import axios from 'axios';
+import { GET_ITEMS, ADD_ITEMS, DELETE_ITEMS, ITEMS_LOADING } from './types';   
 
-export const getItems = () => {
-    return{ //going to ItemReducer and checking action.type
-        type: GET_ITEMS
-        
-    };
+export const getItems = () => dispatch => {
+     dispatch(setItemsLoading());//going to ItemReducer and checking action.type
+      axios
+        .get('/api/items').then(res => 
+            dispatch({
+                type:GET_ITEMS,
+                payload: res.data
+            })
+            )  
 };
 
 export const deleteItem  = id => {
@@ -12,7 +17,7 @@ export const deleteItem  = id => {
         type: DELETE_ITEMS,
         payload: id
         
-    };
+    };  
 };
 
 export const addItem  = item => {
@@ -22,3 +27,9 @@ export const addItem  = item => {
         
     };
 };
+
+export const setItemsLoading = () => {
+    return {
+        type:ITEMS_LOADING
+    }
+}
