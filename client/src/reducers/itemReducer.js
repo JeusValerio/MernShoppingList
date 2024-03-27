@@ -12,13 +12,15 @@ export default function(state = initialState, action) {
     switch(action.type) {
         case GET_ITEMS:
             return {
-                ...state    
+                ...state,
+                item: action.payload,
+                loading: false          
             };
         case  DELETE_ITEMS:
             return {
                 ...state,
                 item: state.item.filter(item => item.id !== action.payload)      
-            };
+            };  
         case ADD_ITEMS:
             return {
                 ...state,
