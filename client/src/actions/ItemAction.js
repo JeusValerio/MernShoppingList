@@ -3,10 +3,9 @@ import { GET_ITEMS, ADD_ITEMS, DELETE_ITEMS, ITEMS_LOADING } from './types';
 
 export const getItems = () => dispatch => {
      dispatch(setItemsLoading());//going to ItemReducer and checking action.type
-      axios
-        .get('/api/items').then(res => 
+      axios.get('/api/item').then(res => 
             dispatch({
-                type:GET_ITEMS,
+                type: GET_ITEMS,
                 payload: res.data
             })
             )  
