@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 item: state.item.filter(item => item.id !== action.payload)      
-            };  
+            };      
         case ADD_ITEMS:
             return {
                 ...state,

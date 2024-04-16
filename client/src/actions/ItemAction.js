@@ -8,7 +8,7 @@ export const getItems = () => dispatch => {
                 type: GET_ITEMS,
                 payload: res.data
             })
-            )  
+            );  
 };
 
 export const deleteItem  = id => {
@@ -19,12 +19,14 @@ export const deleteItem  = id => {
     };  
 };
 
-export const addItem  = item => {
-    return{ //going to ItemReducer and checking action.type
-        type: ADD_ITEMS,
-        payload: item
-        
-    };
+export const addItem  = item => dispatch => {
+    axios
+        .post('/api/items', item)
+        .then(res => 
+            dispatch({
+                type: ADD_ITEMS,
+                payload: res.data
+            }))
 };
 
 export const setItemsLoading = () => {
