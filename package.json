@@ -20,9 +20,9 @@
     "mongodb": "^6.4.0",
     "mongoose": "^8.2.1"
   },
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "nodemon": "^3.1.0"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }

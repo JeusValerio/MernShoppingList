@@ -1,7 +1,7 @@
 //get item to dispatch from the server to the reducer
 //import uuid from 'uuid';
 import { v4 as uuidv4 } from 'uuid';
-import { GET_ITEMS, ADD_ITEMS, DELETE_ITEMS, ITEMS_LOADING } from '../actions/types';
+import { GET_ITEM, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
     item: [],
@@ -10,18 +10,18 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        case GET_ITEMS:
+        case GET_ITEM:
             return {
                 ...state,
                 item: action.payload,
                 loading: false          
             };
-        case  DELETE_ITEMS:
+        case  DELETE_ITEM:
             return {
                 ...state,
                 item: state.item.filter(item => item.id !== action.payload)      
             };      
-        case ADD_ITEMS:
+        case ADD_ITEM:
             return {
                 ...state,
                 item: [action.payload, ...state.item]
